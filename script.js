@@ -6,16 +6,25 @@ const submitDialog = document.querySelector(
 
 const myLibrary = [];
 
+function toggleQuote() {
+	const quoteContainer = document.querySelector(".quote-container");
+	quoteContainer.classList.toggle("display-none");
+}
+
+function capitalize(str) {
+	return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 function Book(title, author, pages, language, genre, isRead) {
 	if (!new.target) {
 		throw Error("Use new keyword to call a constructor function");
 	}
 	this.uid = crypto.randomUUID();
-	this.title = title.charAt(0).toUpperCase() + title.slice(1);
-	this.author = author.charAt(0).toUpperCase() + author.slice(1);
+	this.title = capitalize(title);
+	this.author = capitalize(author);
 	this.pages = pages;
-	this.language = language.charAt(0).toUpperCase() + language.slice(1);
-	this.genre = genre.charAt(0).toUpperCase() + genre.slice(1);
+	this.language = capitalize(language);
+	this.genre = capitalize(genre);
 	this.isRead = isRead;
 }
 
@@ -38,19 +47,16 @@ function createCard(book) {
 				<span class="slider"></span>
 			</label>`;
 	card.innerHTML = content;
-
 	return card;
 }
 
-function displayCards(myLibrary) {
+function displayCards(newBook) {
 	const cardContainer = document.querySelector(".card-container");
-	for (const book of myLibrary) {
-		const card = createCard(book);
-		cardContainer.appendChild(card);
-	}
+	const card = createCard(newBook);
+	cardContainer.appendChild(card);
 }
 
-addBookBtn.addEventListener("click", (event) => {
+addBookBtn.addEventListener("click", () => {
 	addDialog.showModal();
 });
 
@@ -60,7 +66,6 @@ function getInputs() {
 	inputList.forEach((element) => {
 		userInputs.push(element.value);
 	});
-
 	return userInputs;
 }
 
@@ -69,9 +74,11 @@ submitDialog.addEventListener("click", (event) => {
 	const userInputs = getInputs();
 	addBookToLibrary(...userInputs);
 	document.querySelector("dialog form").reset();
-	
 	addDialog.close();
-	const cardContainer = document.querySelector(".card-container");
-	cardContainer.innerHTML = "";
-	displayCards(myLibrary);
+
+	if (myLibrary.length === 1) {
+		toggleQuote()
+	}
+
+	displayCards(myLibrary[myLibrary.length - 1]);
 });

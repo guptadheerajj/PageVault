@@ -32,6 +32,10 @@ body {
 	position: relative;
 }
 
+.display-none {
+	display: none;
+}
+
 .quote-container {
 	position: absolute;
 }
@@ -184,7 +188,6 @@ nav input {
 }
 
 .info > span:nth-child(1) {
-	text-decoration: underline;
 	font-weight: 700;
 }
 
