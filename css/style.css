@@ -28,6 +28,12 @@ body {
 	padding: 0 36px 0 0;
 	color: var(--clr-white);
 	gap: 8px;
+
+	position: relative;
+}
+
+.quote-container {
+	position: absolute;
 }
 
 nav,
@@ -204,10 +210,12 @@ nav input {
 	background-color: rgba(0, 0, 0, 0.5);
 }
 
-.add-new-dialog > img {
+.close-btn {
 	position: absolute;
 	top: 10px;
 	right: 10px;
+	background-color: var(--bg-clr-card);
+	border: none;
 }
 
 form > h1 {

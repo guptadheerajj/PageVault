@@ -1,3 +1,9 @@
+const addBookBtn = document.querySelector(".add-new");
+const addDialog = document.querySelector(".add-new-dialog");
+const submitDialog = document.querySelector(
+	".form-row > button[type = 'submit']"
+);
+
 const myLibrary = [];
 
 function Book(title, author, pages, language, genre, isRead) {
@@ -27,7 +33,7 @@ function createCard(book) {
 			<div class="language info"><span class="info-type">Language:</span> <span>${book.language}</span></div>
 			<div class="genre info"><span class="info-type">Genre:</span> <span>${book.genre}</span></div>
 			<label class="switch info">
-				<span class="info-type">Mark as read:</span>
+				<span class="info-type">Read?:</span>
 				<input type="checkbox">
 				<span class="slider"></span>
 			</label>`;
@@ -44,16 +50,28 @@ function displayCards(myLibrary) {
 	}
 }
 
-addBookToLibrary(
-	"Operating system",
-	"dheeraj",
-	21,
-	"english",
-	"programming",
-	"true"
-);
+addBookBtn.addEventListener("click", (event) => {
+	addDialog.showModal();
+});
 
-addBookToLibrary("Atomic system", "aryan", 24, "english", "Chemistry", "false");
-addBookToLibrary("Video system", "akash", 20, "english", "Design", "true");
+function getInputs() {
+	const inputList = document.querySelectorAll(".form-row input");
+	const userInputs = [];
+	inputList.forEach((element) => {
+		userInputs.push(element.value);
+	});
 
-displayCards(myLibrary);
+	return userInputs;
+}
+
+submitDialog.addEventListener("click", (event) => {
+	event.preventDefault();
+	const userInputs = getInputs();
+	addBookToLibrary(...userInputs);
+	document.querySelector("dialog form").reset();
+	
+	addDialog.close();
+	const cardContainer = document.querySelector(".card-container");
+	cardContainer.innerHTML = "";
+	displayCards(myLibrary);
+});
