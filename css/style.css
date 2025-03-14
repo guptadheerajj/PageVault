@@ -5,11 +5,14 @@
 	--bg-clr-main: #1d1d2a;
 	--clr-line: #2f3040;
 	--clr-white: #f7fafa;
-	--clr-vault: #ffffff;
 	--bg-clr-card: #1c2936;
 	--bg-clr-read: #29384d;
 	--clr-card-text: #8a9ebf;
 	--clr-card-border: #33405c;
+
+	--warning-clr: #ffcc00;
+	--valid-clr: #339900;
+	--invalid-clr: #cc3300;
 }
 
 body {
@@ -114,7 +117,7 @@ nav input {
 	color: var(--light-blue);
 }
 .clr-white {
-	color: var(--clr-vault);
+	color: var(--clr-white);
 }
 
 .clr-white::after {
@@ -181,4 +184,82 @@ nav input {
 
 .pages > span:nth-child(2) {
 	font-family: "Montserrat", sans-serif;
+}
+
+/* dialog */
+
+.add-new-dialog {
+	background-color: var(--bg-clr-card);
+	color: var(--clr-white);
+	width: 350px;
+	width: calc(clamp(31.25rem, -9.709vw + 33.525rem, 21.875rem));
+	border: 2px solid var(--clr-card-border);
+	border-radius: 8px;
+	position: absolute;
+	left: 36%;
+	top: 36px;
+}
+
+.add-new-dialog::backdrop {
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.add-new-dialog > img {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+form > h1 {
+	text-align: center;
+	color: var(--warning-clr);
+}
+
+.form-row {
+	margin: 16px 16px;
+}
+
+.form-row > label,
+.form-row > input {
+	display: block;
+	width: 100%;
+}
+
+.form-row > label {
+	margin-bottom: 4px;
+	font-weight: 600;
+}
+
+.form-row > input {
+	padding: 8px;
+	border-radius: 4px;
+}
+
+.form-row > input:focus {
+	outline: none;
+	border: 2px solid var(--warning-clr);
+}
+
+.form-row.dialog-button {
+	display: flex;
+	flex-flow: row wrap;
+	gap: 32px;
+}
+
+.form-row.dialog-button > button {
+	flex: 1 1 0;
+	padding: 8px 0;
+	border-radius: 4px;
+	border: 2px solid var(--clr-card-border);
+}
+
+.form-row.dialog-button > button:nth-child(1) {
+	background-color: var(--warning-clr);
+	font-weight: 600;
+	color: var(--bg-clr-card);
+}
+.form-row.dialog-button > button:nth-child(2) {
+	background-color: var(--valid-clr);
+	font-weight: 600;
+	color: var(--clr-white);
 }

@@ -47,6 +47,42 @@
 	</nav>
 	<main class="card-container"></main>
 
+	<dialog class="add-new-dialog">
+		<img src="./assets/close-red.svg" alt="">
+		<form action="" method="get">
+			<h1>Add New Book</h1>
+			<div class="form-row">
+				<label for="title">Title</label>
+				<input type="text" id="title" placeholder="Enter book title" required autofocus>
+			</div>
+			<div class="form-row">
+				<label for="author">Author</label>
+				<input type="text" id="author" placeholder="Enter author name" required>
+			</div>
+			<div class="form-row">
+				<label for="pages">Pages</label>
+				<input type="number" id="pages" placeholder="Enter number of pages" required>
+			</div>
+			<div class="form-row">
+				<label for="language">Language</label>
+				<input type="text" id="language" placeholder="Enter language">
+			</div>
+			<div class="form-row">
+				<label for="genre">Genre</label>
+				<input type="text" id="genre" placeholder="Enter genre">
+			</div>
+			<div class="form-row">
+				<label for="read">Mark as read:
+					<input type="checkbox" id="read">
+				</label>
+			</div>
+			<div class="form-row dialog-button">
+				<button>Reset</button>
+				<button>Submit</button>
+			</div>
+		</form>
+	</dialog>
+
 	<script src="./script.js"></script>
 </body>
 
