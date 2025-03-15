@@ -196,6 +196,61 @@ nav input {
 	font-family: "Montserrat", sans-serif;
 }
 
+/* slider */
+.switch {
+	display: flex;
+	gap: 6px;
+}
+
+.card label {
+	user-select: none;
+}
+
+.toggle {
+	appearance: none;
+	position: relative;
+	display: flex;
+	align-items: center;
+	font-weight: 900;
+}
+
+.toggle::before {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 0.5rem;
+	content: "\2715";
+	height: 1.8em;
+	width: 1.8em;
+	background-color: white;
+	color: red;
+	border-radius: 50%;
+	position: absolute;
+	left: 1px;
+
+	transition: 0.3s ease-in-out;
+}
+
+.toggle::after {
+	content: "";
+	width: 2em;
+	height: 1em;
+	background-color: red;
+	display: inline-block;
+	border-radius: 1em;
+}
+
+.toggle:checked::before {
+	transform: translateX(2em);
+	transition: 0.3s ease-in-out;
+	color: green;
+	content: "\2713";
+}
+
+.toggle:checked::after {
+	background-color: green;
+}
+
 /* dialog */
 
 .add-new-dialog {
@@ -276,59 +331,25 @@ form > h1 {
 	color: var(--clr-white);
 }
 
-/* slider */
-.switch {
-	display: flex;
-	gap: 6px;
+/* dialog slider */
+.switch > label, .switch > input {
+	width: auto;
+	padding: 0;
 }
 
-.card label {
-	user-select: none;
-}
-
-.toggle {
-	appearance: none;
-	position: relative;
+#dialogRead {
 	display: flex;
 	align-items: center;
-	font-weight: 900;
 }
 
-
-.toggle::before {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-size: .5rem;
-	content: "\2715";
-	height: 1.8em;
-	width: 1.8em;
-	background-color: white;
-	color: red;
-	border-radius: 50%;
-	position: absolute;
-	left: 1px;
-
-	transition: .3s ease-in-out;
+.switch > label {
+	margin-bottom: 0;
 }
 
-.toggle::after {
-	content: "";
-	width: 2em;
-	height: 1em;
-	background-color: red;
-	display: inline-block;
-	border-radius: 1em;
+.switch > input:focus {
+	border: none;
 }
 
-
-.toggle:checked::before {
-	transform: translateX(2em);
-	transition: 0.3s ease-in-out;
-	color: green;
-	content: "\2713";
-}
-
-.toggle:checked::after {
-	background-color: green;
+.form-row .toggle::before {
+	top: .6em;
 }
