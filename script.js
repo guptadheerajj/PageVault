@@ -15,7 +15,7 @@ function capitalize(str) {
 	return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-function Book(title, author, pages, language, genre, isRead) {
+function Book({ title, author, pages, language, genre, isRead }) {
 	if (!new.target) {
 		throw Error("Use new keyword to call a constructor function");
 	}
@@ -28,32 +28,39 @@ function Book(title, author, pages, language, genre, isRead) {
 	this.isRead = isRead;
 }
 
-function addBookToLibrary(title, author, pages, language, genre, isRead) {
-	const book = new Book(title, author, pages, language, genre, isRead);
+function addBookToLibrary(userInputs) {
+	const book = new Book(userInputs);
 	myLibrary.push(book);
+	console.log(myLibrary);
 }
 
-function createCard(book) {
+function createCard(newBook) {
 	const card = document.createElement("div");
 	card.classList.add("card");
-	const content = `<div class="title">${book.title}</div>
-	<div class="author info"><span class="info-type">By:</span> <span>${book.author}</span></div>
-	<div class="pages info"><span class="info-type">Number of Pages:</span> <span>${book.pages}</span></div>
-	<div class="language info"><span class="info-type">Language:</span> <span>${book.language}</span></div>
-	<div class="genre info"><span class="info-type">Genre:</span> <span>${book.genre}</span></div>
+	const content = `<div class="title">${newBook.title}</div>
+	<div class="author info"><span class="info-type">By:</span> <span>${newBook.author}</span></div>
+	<div class="pages info"><span class="info-type">Number of Pages:</span> <span>${newBook.pages}</span></div>
+	<div class="language info"><span class="info-type">Language:</span> <span>${newBook.language}</span></div>
+	<div class="genre info"><span class="info-type">Genre:</span> <span>${newBook.genre}</span></div>
 	<div class="switch info">
-		<label for="${book.uid}" class="info-type">Read?:</label>
-		<input type="checkbox" id="${book.uid}" class="toggle" name="isRead">
+		<label for="${newBook.uid}" class="info-type">Read?:</label>
+		<input type="checkbox" id="${newBook.uid}" class="toggle" name="isRead">
 	</div>`;
-	console.log(book.uid);
 	card.innerHTML = content;
 	return card;
 }
 
 function displayCards(newBook) {
-	const cardContainer = document.querySelector(".card-container");
+	const cardContainer = document.querySelector("main");
 	const card = createCard(newBook);
 	cardContainer.appendChild(card);
+
+	const inputElement = document.querySelector(`input[id = "${newBook.uid}"]`);
+	if (inputElement) {
+		inputElement.checked = newBook.isRead;
+	} else {
+		console.error(`No input element was found with id ${newBook.uid}`);
+	}
 }
 
 addBookBtn.addEventListener("click", () => {
@@ -62,33 +69,67 @@ addBookBtn.addEventListener("click", () => {
 
 function getInputs() {
 	const inputList = document.querySelectorAll(".form-row input");
-	const userInputs = [];
+	const userInputs = {};
 	inputList.forEach((element) => {
-		userInputs.push(element.value);
+		if (element.type === "checkbox") {
+			userInputs[element.name] = element.checked;
+		} else {
+			userInputs[element.name] = element.value;
+		}
 	});
+	console.log(userInputs);
 	return userInputs;
 }
 
 submitDialog.addEventListener("click", (event) => {
 	event.preventDefault();
 	const userInputs = getInputs();
-	addBookToLibrary(...userInputs);
+	addBookToLibrary(userInputs);
 	document.querySelector("dialog form").reset();
 	addDialog.close();
 
 	if (myLibrary.length === 1) {
 		toggleQuote();
 	}
-	
+
 	displayCards(myLibrary[myLibrary.length - 1]);
 });
 
 toggleQuote();
-addBookToLibrary("The hobbit", "Dheeraj", 234, "Sci-Fi", "English", "True");
-addBookToLibrary("The hobbit", "Dheeraj", 234, "Sci-Fi", "English", "True");
-addBookToLibrary("The hobbit", "Dheeraj", 234, "Sci-Fi", "English", "True");
-addBookToLibrary("The hobbit", "Dheeraj", 234, "Sci-Fi", "English", "True");
+addBookToLibrary({
+	title: "Example Book title1",
+	author: "Book Author",
+	pages: 555,
+	genre: "Example genre",
+	language: "Example Language",
+	isRead: true,
+});
+addBookToLibrary({
+	title: "Example Book title2",
+	author: "Book Author",
+	pages: 555,
+	genre: "Example genre",
+	language: "Example Language3",
+	isRead: false,
+});
+addBookToLibrary({
+	title: "Example Book title4",
+	author: "Book Author",
+	pages: 555,
+	genre: "Example genre",
+	language: "Example Language",
+	isRead: true,
+});
+addBookToLibrary({
+	title: "Example Book title4",
+	author: "Book Author",
+	pages: 555,
+	genre: "Example genre",
+	language: "Example Language",
+	isRead: false,
+});
+
 displayCards(myLibrary[0]);
-displayCards(myLibrary[3]);
 displayCards(myLibrary[1]);
 displayCards(myLibrary[2]);
+displayCards(myLibrary[3]);
