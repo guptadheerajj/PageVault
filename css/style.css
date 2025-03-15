@@ -261,8 +261,9 @@ nav input {
 	border: 2px solid var(--clr-card-border);
 	border-radius: 8px;
 	position: absolute;
-	left: 36%;
-	top: 36px;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .add-new-dialog::backdrop {
@@ -332,7 +333,8 @@ form > h1 {
 }
 
 /* dialog slider */
-.switch > label, .switch > input {
+.switch > label,
+.switch > input {
 	width: auto;
 	padding: 0;
 }
@@ -351,5 +353,5 @@ form > h1 {
 }
 
 .form-row .toggle::before {
-	top: .6em;
+	top: 0.6em;
 }
