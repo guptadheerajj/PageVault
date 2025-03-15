@@ -37,15 +37,15 @@ function createCard(book) {
 	const card = document.createElement("div");
 	card.classList.add("card");
 	const content = `<div class="title">${book.title}</div>
-			<div class="author info"><span class="info-type">By:</span> <span>${book.author}</span></div>
-			<div class="pages info"><span class="info-type">Number of Pages:</span> <span>${book.pages}</span></div>
-			<div class="language info"><span class="info-type">Language:</span> <span>${book.language}</span></div>
-			<div class="genre info"><span class="info-type">Genre:</span> <span>${book.genre}</span></div>
-			<label class="switch info">
-				<span class="info-type">Read?:</span>
-				<input type="checkbox">
-				<span class="slider"></span>
-			</label>`;
+	<div class="author info"><span class="info-type">By:</span> <span>${book.author}</span></div>
+	<div class="pages info"><span class="info-type">Number of Pages:</span> <span>${book.pages}</span></div>
+	<div class="language info"><span class="info-type">Language:</span> <span>${book.language}</span></div>
+	<div class="genre info"><span class="info-type">Genre:</span> <span>${book.genre}</span></div>
+	<div class="switch info">
+		<label for="${book.uid}" class="info-type">Read?:</label>
+		<input type="checkbox" id="${book.uid}" class="toggle" name="isRead">
+	</div>`;
+	console.log(book.uid);
 	card.innerHTML = content;
 	return card;
 }
@@ -77,8 +77,18 @@ submitDialog.addEventListener("click", (event) => {
 	addDialog.close();
 
 	if (myLibrary.length === 1) {
-		toggleQuote()
+		toggleQuote();
 	}
-
+	
 	displayCards(myLibrary[myLibrary.length - 1]);
 });
+
+toggleQuote();
+addBookToLibrary("The hobbit", "Dheeraj", 234, "Sci-Fi", "English", "True");
+addBookToLibrary("The hobbit", "Dheeraj", 234, "Sci-Fi", "English", "True");
+addBookToLibrary("The hobbit", "Dheeraj", 234, "Sci-Fi", "English", "True");
+addBookToLibrary("The hobbit", "Dheeraj", 234, "Sci-Fi", "English", "True");
+displayCards(myLibrary[0]);
+displayCards(myLibrary[3]);
+displayCards(myLibrary[1]);
+displayCards(myLibrary[2]);

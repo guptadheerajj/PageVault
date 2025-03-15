@@ -187,7 +187,8 @@ nav input {
 	margin-bottom: 16px;
 }
 
-.info > span:nth-child(1) {
+.info > span:nth-child(1),
+.card label {
 	font-weight: 700;
 }
 
@@ -273,4 +274,61 @@ form > h1 {
 	background-color: var(--valid-clr);
 	font-weight: 600;
 	color: var(--clr-white);
+}
+
+/* slider */
+.switch {
+	display: flex;
+	gap: 6px;
+}
+
+.card label {
+	user-select: none;
+}
+
+.toggle {
+	appearance: none;
+	position: relative;
+	display: flex;
+	align-items: center;
+	font-weight: 900;
+}
+
+
+.toggle::before {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: .5rem;
+	content: "\2715";
+	height: 1.8em;
+	width: 1.8em;
+	background-color: white;
+	color: red;
+	border-radius: 50%;
+	position: absolute;
+	left: 1px;
+
+	transition: .3s ease-in-out;
+}
+
+.toggle::after {
+	content: "";
+	width: 2em;
+	height: 1em;
+	background-color: red;
+	display: inline-block;
+	border-radius: 1em;
+}
+
+
+.toggle:checked::before {
+	transform: translateX(2em);
+	transition: 0.3s ease-in-out;
+	color: green;
+	content: "\2713";
+}
+
+.toggle:checked::after {
+	background-color: green;
 }
