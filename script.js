@@ -28,10 +28,13 @@ function Book({ title, author, pages, language, genre, isRead }) {
 	this.isRead = isRead;
 }
 
+Book.prototype.toggleCheckboxStatus = function () {
+	this.isRead = !this.isRead;
+};
+
 function addBookToLibrary(userInputs) {
 	const book = new Book(userInputs);
 	myLibrary.push(book);
-	console.log(myLibrary);
 }
 
 function createCard(newBook) {
@@ -50,17 +53,23 @@ function createCard(newBook) {
 	return card;
 }
 
-function displayCards(newBook) {
-	const cardContainer = document.querySelector("main");
-	const card = createCard(newBook);
-	cardContainer.appendChild(card);
-
+function setCheckboxStatus(newBook) {
 	const inputElement = document.querySelector(`input[id = "${newBook.uid}"]`);
 	if (inputElement) {
 		inputElement.checked = newBook.isRead;
 	} else {
 		console.error(`No input element was found with id ${newBook.uid}`);
 	}
+	inputElement.addEventListener("click", () => {
+		newBook.toggleCheckboxStatus();
+	});
+}
+
+function displayCards(newBook) {
+	const cardContainer = document.querySelector("main");
+	const card = createCard(newBook);
+	cardContainer.appendChild(card);
+	setCheckboxStatus(newBook);
 }
 
 addBookBtn.addEventListener("click", () => {
@@ -77,7 +86,6 @@ function getInputs() {
 			userInputs[element.name] = element.value;
 		}
 	});
-	console.log(userInputs);
 	return userInputs;
 }
 
