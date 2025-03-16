@@ -124,7 +124,7 @@ submitDialog.addEventListener("click", (event) => {
 });
 
 addBookToLibrary({
-	title: "Example Book title1",
+	title: "Example Book Title",
 	author: "Book Author",
 	pages: 842,
 	genre: "Example genre",
