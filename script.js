@@ -69,7 +69,9 @@ function setCheckboxStatus(newBook) {
 function popBookFromLibrary(newBookUid) {
 	const indexOfBook = myLibrary.findIndex((book) => book.uid === newBookUid);
 	myLibrary.splice(indexOfBook, 1);
-	console.log(myLibrary);
+	if (myLibrary.length === 0) {
+		toggleQuote();
+	}
 }
 
 function addRemoveFunctionality(card, newBookUid) {
@@ -112,50 +114,22 @@ submitDialog.addEventListener("click", (event) => {
 	const userInputs = getInputs();
 	addBookToLibrary(userInputs);
 	document.querySelector("dialog form").reset();
-	addDialog.close();
-
+	
 	if (myLibrary.length === 1) {
 		toggleQuote();
 	}
+	addDialog.close();
 
 	displayCards(myLibrary[myLibrary.length - 1]);
 });
 
-toggleQuote();
 addBookToLibrary({
 	title: "Example Book title1",
 	author: "Book Author",
-	pages: 555,
+	pages: 842,
 	genre: "Example genre",
 	language: "Example Language",
 	isRead: true,
-});
-addBookToLibrary({
-	title: "Example Book title2",
-	author: "Book Author",
-	pages: 555,
-	genre: "Example genre",
-	language: "Example Language3",
-	isRead: false,
-});
-addBookToLibrary({
-	title: "Example Book title4",
-	author: "Book Author",
-	pages: 555,
-	genre: "Example genre",
-	language: "Example Language",
-	isRead: true,
-});
-addBookToLibrary({
-	title: "Example Book title4",
-	author: "Book Author",
-	pages: 555,
-	genre: "Example genre",
-	language: "Example Language",
-	isRead: false,
 });
 
 displayCards(myLibrary[0]);
-displayCards(myLibrary[1]);
-displayCards(myLibrary[2]);
-displayCards(myLibrary[3]);
