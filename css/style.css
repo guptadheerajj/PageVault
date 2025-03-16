@@ -97,14 +97,15 @@ nav input {
 	gap: 4px;
 }
 
-.add-new:hover {
-	text-decoration: underline;
-}
-
 .button {
 	background-color: var(--light-blue);
 	border-radius: 30px;
 	padding: 8px 16px;
+}
+
+.button:hover {
+	transform: scale(1.08);
+	transition: .2s;
 }
 
 /* sidebar */
@@ -176,6 +177,16 @@ nav input {
 	padding: 24px;
 	line-height: 1.5;
 	color: var(--clr-card-text);
+}
+
+.card > button {
+	background-color: #EB5352;
+	color: #EAEAEA;
+	font-weight: 700;
+	border: none;
+	line-height: 1;
+	margin-top: 8px;
+	font-size: .8em;
 }
 
 .card .title {

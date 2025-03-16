@@ -48,7 +48,8 @@ function createCard(newBook) {
 	<div class="switch info">
 		<label for="${newBook.uid}" class="info-type">Read?:</label>
 		<input type="checkbox" id="${newBook.uid}" class="toggle" name="isRead">
-	</div>`;
+	</div>
+	<button class="button" data-card-uid="${newBook.uid}">Remove</button>`;
 	card.innerHTML = content;
 	return card;
 }
@@ -65,11 +66,28 @@ function setCheckboxStatus(newBook) {
 	});
 }
 
+function popBookFromLibrary(newBookUid) {
+	const indexOfBook = myLibrary.findIndex((book) => book.uid === newBookUid);
+	myLibrary.splice(indexOfBook, 1);
+	console.log(myLibrary);
+}
+
+function addRemoveFunctionality(card, newBookUid) {
+	const removeButton = document.querySelector(
+		`[data-card-uid = "${newBookUid}"]`
+	);
+	removeButton.addEventListener("click", () => {
+		card.remove();
+		popBookFromLibrary(newBookUid);
+	});
+}
+
 function displayCards(newBook) {
 	const cardContainer = document.querySelector("main");
 	const card = createCard(newBook);
 	cardContainer.appendChild(card);
 	setCheckboxStatus(newBook);
+	addRemoveFunctionality(card, newBook.uid);
 }
 
 addBookBtn.addEventListener("click", () => {
