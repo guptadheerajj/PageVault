@@ -11,26 +11,24 @@ function toggleQuote() {
 	quoteContainer.classList.toggle("display-none");
 }
 
-function capitalize(str) {
-	return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
-function Book({ title, author, pages, language, genre, isRead }) {
-	if (!new.target) {
-		throw Error("Use new keyword to call a constructor function");
+class Book {
+	uid = crypto.randomUUID();
+	constructor({ title, author, pages, language, genre, isRead }) {
+		this.title = Book.capitalize(title);
+		this.author = Book.capitalize(author);
+		this.pages = pages;
+		this.language = Book.capitalize(language);
+		this.genre = Book.capitalize(genre);
+		this.isRead = isRead;
 	}
-	this.uid = crypto.randomUUID();
-	this.title = capitalize(title);
-	this.author = capitalize(author);
-	this.pages = pages;
-	this.language = capitalize(language);
-	this.genre = capitalize(genre);
-	this.isRead = isRead;
-}
 
-Book.prototype.toggleCheckboxStatus = function () {
-	this.isRead = !this.isRead;
-};
+	static capitalize(str) {
+		return str.charAt(0).toUpperCase() + str.slice(1);
+	}
+	toggleCheckboxStatus() {
+		this.isRead = !this.isRead;
+	}
+}
 
 function addBookToLibrary(userInputs) {
 	const book = new Book(userInputs);
@@ -111,10 +109,14 @@ function getInputs() {
 
 submitDialog.addEventListener("click", (event) => {
 	event.preventDefault();
+	const form = document.querySelector("dialog > form");
+	if (!form.reportValidity()) {
+		return;
+	}
 	const userInputs = getInputs();
 	addBookToLibrary(userInputs);
 	document.querySelector("dialog form").reset();
-	
+
 	if (myLibrary.length === 1) {
 		toggleQuote();
 	}
